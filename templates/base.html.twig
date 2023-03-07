@@ -7,6 +7,9 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/sketchy/_variables.scss" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/sketchy/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/sketchy/_bootswatch.scss" rel="stylesheet">
         {% endblock %}
 
         {% block javascripts %}
