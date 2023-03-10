@@ -5,33 +5,31 @@
 {% block body %}
     <h1>Mes Ingrédients</h1>
 
-
-
-<table class="table table-hover">
-  <thead>
-    <tr class="table-active">
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Création date</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ingredient in ingredients %}
-        {% if loop.index is even %}
+    <table class="table table-hover">
+        <thead>
             <tr class="table-active">
-                <td>{{ ingredient.name }}-{{ loop.index }}</th>
-                <td>{{ ingredient.price }}</td>
-                <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Création date</th>
             </tr>
-        {% else %}
-            <tr>
-                <td>{{ ingredient.name }}-{{ loop.index }}</th>
-                <td>{{ ingredient.price }}</td>
-                <td>{{ ingredient.createdAt|format_datetime() }}</td>
-            </tr>
-        {% endif %}
-    {% endfor %}
-    
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients %}
+                {% if loop.index is even %}
+                    <tr class="table-active">
+                        <td>{{ ingredient.name }}-{{ loop.index }}</th>
+                        <td>{{ ingredient.price }}</td>
+                        <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ ingredient.name }}-{{ loop.index }}</th>
+                        <td>{{ ingredient.price }}</td>
+                        <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
