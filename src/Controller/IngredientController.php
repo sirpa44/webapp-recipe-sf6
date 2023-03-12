@@ -15,9 +15,9 @@ class IngredientController extends AbstractController
     public function index(IngredientRepository $ingredientRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagination = $paginator->paginate(
-            $ingredientRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
+            $ingredientRepository->findAll(),
+            $request->query->getInt('page', 1),
+            10,
         );
 
         return $this->render('pages/ingredient/index.html.twig', [
