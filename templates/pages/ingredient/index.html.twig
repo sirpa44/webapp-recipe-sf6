@@ -3,33 +3,41 @@
 {% block title %}Mes Ingrédients{% endblock %}
 
 {% block body %}
-    <h1>Mes Ingrédients</h1>
+    <div class="container col-10">
+        <h1>Mes Ingrédients</h1>
 
-    <table class="table table-hover">
-        <thead>
-            <tr class="table-active">
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Création date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ingredient in ingredients %}
-                {% if loop.index is even %}
-                    <tr class="table-active">
-                        <td>{{ ingredient.name }}-{{ loop.index }}</th>
-                        <td>{{ ingredient.price }}</td>
-                        <td>{{ ingredient.createdAt|format_datetime() }}</td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td>{{ ingredient.name }}-{{ loop.index }}</th>
-                        <td>{{ ingredient.price }}</td>
-                        <td>{{ ingredient.createdAt|format_datetime() }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Creation date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in pagination %}
+                    {% if loop.index is even %}
+                        <tr class="table-active">
+                            <td>{{ ingredient.id }}</td>
+                            <td>{{ ingredient.name }}</th>
+                            <td>{{ ingredient.price }}</td>
+                            <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ ingredient.id }}</td>
+                            <td>{{ ingredient.name }}</th>
+                            <td>{{ ingredient.price }}</td>
+                            <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
 
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>    
+    </div>
 {% endblock %}
