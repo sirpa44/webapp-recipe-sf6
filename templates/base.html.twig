@@ -25,6 +25,12 @@
     </header>
     <body>
         <div class="container mt-4">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% block body %}{% endblock %}
         </div>
     </body>

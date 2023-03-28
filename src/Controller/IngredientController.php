@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Ingredient;
+use App\Form\IngredientType;
 use App\Repository\IngredientRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IngredientController extends AbstractController
 {
-    #[Route('/ingredient', name: 'app_ingredient')]
+    #[Route('/ingredients', name: 'app_ingredients', methods: 'GET')]
     public function index(IngredientRepository $ingredientRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagination = $paginator->paginate(
@@ -22,6 +25,27 @@ class IngredientController extends AbstractController
 
         return $this->render('pages/ingredient/index.html.twig', [
             'pagination' => $pagination
+        ]);
+    }
+
+    #[Route('/ingredient/new', name: 'app_ingredient_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $em): Response
+    {
+        $ingredient = new Ingredient();
+        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'your new ingredient is added successfully');
+            $ingredient = $form->getData();
+            $em->persist($ingredient);
+            $em->flush();
+
+            return $this->redirectToRoute('app_ingredients');
+        }
+
+        return $this->renderForm('pages/ingredient/new.html.twig', [
+            'form' => $form,
         ]);
     }
 }
