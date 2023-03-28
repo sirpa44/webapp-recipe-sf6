@@ -6,6 +6,8 @@
     <div class="container col-10">
         <h1>Mes Ingrédients</h1>
 
+        <a href="{{ path('app_ingredient_new') }}" class="btn btn-success">New Ingredient</a>
+
         <div class="count mt-4">
             <small>total: {{ pagination.getTotalItemCount }}</small>
         </div>
@@ -18,6 +20,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Creation date</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +31,7 @@
                             <td>{{ ingredient.name }}</th>
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                            <td><a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a></td>
                         </tr>
                     {% else %}
                         <tr>
@@ -35,6 +39,7 @@
                             <td>{{ ingredient.name }}</th>
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|format_datetime() }}</td>
+                            <td><a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a></td>
                         </tr>
                     {% endif %}
                 {% endfor %}

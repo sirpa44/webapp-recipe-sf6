@@ -44,8 +44,30 @@ class IngredientController extends AbstractController
             return $this->redirectToRoute('app_ingredients');
         }
 
-        return $this->renderForm('pages/ingredient/new.html.twig', [
+        return $this->renderForm('pages/ingredient/form.html.twig', [
             'form' => $form,
+            'title' => "Create new ingredient"
+        ]);
+    }
+
+    #[Route('/ingredient/{ingredient}/update', name: 'app_ingredient_update', methods: ['GET', 'POST'])]
+    public function update( Ingredient $ingredient, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(IngredientType::class, $ingredient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'your new ingredient is updated successfully');
+            $ingredient = $form->getData();
+            $em->persist($ingredient);
+            $em->flush();
+
+            return $this->redirectToRoute('app_ingredients');
+        }
+
+        return $this->renderForm('pages/ingredient/form.html.twig', [
+            'form' => $form,
+            'title' => "Update ingredient",
         ]);
     }
 }
