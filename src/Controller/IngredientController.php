@@ -70,4 +70,16 @@ class IngredientController extends AbstractController
             'title' => "Update ingredient",
         ]);
     }
+
+    #[Route('/ingredient/{ingredient}/delete', name: 'app_ingredient_delete', methods: ['GET', 'POST'])]
+    public function delete(Request $request, Ingredient $ingredient, EntityManagerInterface $em): Response
+    {
+
+        $em->remove($ingredient);
+        $em->flush();
+
+        $this->addFlash('success', 'Ingredient is deleted successfully.');
+
+        return $this->redirectToRoute('app_ingredients');
+    }
 }

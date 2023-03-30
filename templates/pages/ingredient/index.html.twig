@@ -31,7 +31,10 @@
                             <td>{{ ingredient.name }}</th>
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|format_datetime() }}</td>
-                            <td><a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a></td>
+                            <td>
+                                <a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{{ path('app_ingredient_delete', {ingredient: ingredient.id}) }}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Do you really want to delete this ingredient?')">Delete</a>
+                            </td>
                         </tr>
                     {% else %}
                         <tr>
@@ -39,7 +42,10 @@
                             <td>{{ ingredient.name }}</th>
                             <td>{{ ingredient.price }}</td>
                             <td>{{ ingredient.createdAt|format_datetime() }}</td>
-                            <td><a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a></td>
+                            <td>
+                                <a href="{{ path('app_ingredient_update', {ingredient: ingredient.id}) }}" class="btn btn-outline-success btn-sm">Update</a>
+                                <a href="{{ path('app_ingredient_delete', {ingredient: ingredient.id}) }}" class="btn btn-outline-danger btn-sm" onclick="return confirm(Do you really want to delete this ingredient?')">Delete</a>
+                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}
