@@ -19,7 +19,7 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\length(min: 2, max: 50)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
@@ -67,7 +67,7 @@ class Recipe
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updateDate = null;
 
-    #[ORM\ManyToMany(targetEntity: ingredient::class)]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class)]
     private Collection $ingredient;
 
     public function __construct()
